@@ -80,7 +80,6 @@ Converted["_using"].Name = "using"
 Converted["_using"].Parent = Converted["_Intro"]
 
 Converted["_image"].Image = "rbxassetid://15011943540"
-Converted["_image"].ImageContent = "rbxassetid://15011943540"
 Converted["_image"].ImageTransparency = 1
 Converted["_image"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Converted["_image"].BackgroundTransparency = 1
