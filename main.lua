@@ -257,7 +257,7 @@ end
 
 -- Fake Local Scripts:
 
-local function AHAYF_fake_script() -- Fake Script: StarterGui.HapticLoader.Init
+local function QAUF_fake_script() -- Fake Script: StarterGui.HapticLoader.Init
     local script = Instance.new("LocalScript")
     script.Name = "Init"
     script.Parent = Converted["_HapticLoader"]
@@ -312,30 +312,30 @@ local function AHAYF_fake_script() -- Fake Script: StarterGui.HapticLoader.Init
 	
 			savedT[script.Parent.Info] = {Transparency = script.Parent.Info.Transparency}
 	
-			for _, v in pairs(script.Parent.Info:GetDescendants()) do
-				if v:IsA("GuiObject") then
-					savedT[v] = {
-						Transparency = v.Transparency
-					}
+		for _, v in pairs(script.Parent.Info:GetDescendants()) do
+			if v:IsA("GuiObject") then
 	
-					if v:IsA("TextLabel") or v:IsA("TextButton") or v:IsA("TextBox") then
-						savedT[v].TextTransparency = v.TextTransparency
-						v.TextTransparency = 1
-					end
+				savedT[v] = {}
 	
-					v.Transparency = 1
+				-- Background
+				if v.BackgroundTransparency ~= nil then
+					savedT[v].BackgroundTransparency = v.BackgroundTransparency
+					v.BackgroundTransparency = 1
+				end
+	
+				-- Text
+				if v:IsA("TextLabel") or v:IsA("TextButton") or v:IsA("TextBox") then
+					savedT[v].TextTransparency = v.TextTransparency
+					v.TextTransparency = 1
+				end
+	
+				-- Image
+				if v:IsA("ImageLabel") or v:IsA("ImageButton") then
+					savedT[v].ImageTransparency = v.ImageTransparency
+					v.ImageTransparency = 1
 				end
 			end
-	
-			script.Parent.Info.Visible = true
-	
-			for obj, transparent in pairs(savedT) do
-				for __, ele in pairs(script.Parent.Info:GetDescendants()) do
-					if obj == ele and obj:IsA("GuiObject") and obj.Name ~= "click" then
-						Tween(obj, ti, transparent)
-					end
-				end
-			end
+		end
 	
 		
 		for _, v in pairs(info) do
@@ -366,4 +366,4 @@ local function AHAYF_fake_script() -- Fake Script: StarterGui.HapticLoader.Init
 	end
 end
 
-return AHAYF_fake_script()
+return QAUF_fake_script()
