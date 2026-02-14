@@ -6,15 +6,15 @@ local image = Intro.image
 
 local click = Info.click
 
-local Tween = require(script.Parent.Tween)
+local function Tween(obj, ti, goal)
+	game:GetService("TweenService"):Create(obj, ti, goal):Play()
+end
 
 local ti = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
 
 local savedT = {}
 
-local infoss = {
-	"Added Silent Aim"
-}
+local scripturl = ""
 
 local function intro()
 	Intro.Visible = true
@@ -84,9 +84,11 @@ end
 click.MouseButton1Click:Connect(function()
 	Tween(Info.UIStroke, ti, {Transparency = 1})
 	Tween(script.Parent.Info, ti, {Size = UDim2.new(0, 358, 0, 0)})
+	loadstring(game:HttpGet(scripturl))()
 end)
 
-return function(infosssss)
+return function(infosssss, url)
+scripturl = url
 task.wait(2)
 intro()
 task.wait(1)
