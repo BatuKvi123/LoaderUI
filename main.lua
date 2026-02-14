@@ -366,4 +366,4 @@ local function AHAYF_fake_script() -- Fake Script: StarterGui.HapticLoader.Init
 	end
 end
 
-coroutine.wrap(AHAYF_fake_script)()
+return AHAYF_fake_script()
