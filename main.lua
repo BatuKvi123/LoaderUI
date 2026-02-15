@@ -7,7 +7,6 @@ local Converted = {
 	["_Intro"] = Instance.new("Frame");
 	["_title"] = Instance.new("TextLabel");
 	["_using"] = Instance.new("TextLabel");
-	["_image"] = Instance.new("ImageLabel");
 	["_Init"] = Instance.new("LocalScript");
 	["_Tween"] = Instance.new("ModuleScript");
 	["_Info"] = Instance.new("Frame");
@@ -26,7 +25,6 @@ local Converted = {
 	["_Divider"] = Instance.new("Frame");
 	["_UIGradient2"] = Instance.new("UIGradient");
 	["__TEMPLATE"] = Instance.new("TextLabel");
-	["_Frame"] = Instance.new("Frame");
 }
 
 -- Properties:
@@ -40,7 +38,7 @@ Converted["_Intro"].BackgroundTransparency = 1
 Converted["_Intro"].BorderColor3 = Color3.fromRGB(0, 0, 0)
 Converted["_Intro"].BorderSizePixel = 0
 Converted["_Intro"].Position = UDim2.new(0.412844032, 0, 0.361464977, 0)
-Converted["_Intro"].Size = UDim2.new(0.173547402, 0, 0.275477707, 0)
+Converted["_Intro"].Size = UDim2.new(0.173547402, 0, 0.22292994, 0)
 Converted["_Intro"].Visible = false
 Converted["_Intro"].Name = "Intro"
 Converted["_Intro"].Parent = Converted["_HapticLoader"]
@@ -74,21 +72,10 @@ Converted["_using"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Converted["_using"].BackgroundTransparency = 1
 Converted["_using"].BorderColor3 = Color3.fromRGB(0, 0, 0)
 Converted["_using"].BorderSizePixel = 0
-Converted["_using"].Position = UDim2.new(0.141609088, 0, 0.375317514, 0)
-Converted["_using"].Size = UDim2.new(0.709251106, 0, 0.150289014, 0)
+Converted["_using"].Position = UDim2.new(0.141609088, 0, 0.371067584, 0)
+Converted["_using"].Size = UDim2.new(0.709251106, 0, 0.213580191, 0)
 Converted["_using"].Name = "using"
 Converted["_using"].Parent = Converted["_Intro"]
-
-Converted["_image"].Image = "rbxassetid://15011943540"
-Converted["_image"].ImageTransparency = 1
-Converted["_image"].BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Converted["_image"].BackgroundTransparency = 1
-Converted["_image"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_image"].BorderSizePixel = 0
-Converted["_image"].Position = UDim2.new(0.343612343, 0, 0.560288608, 0)
-Converted["_image"].Size = UDim2.new(0.312775344, 0, 0.398843944, 0)
-Converted["_image"].Name = "image"
-Converted["_image"].Parent = Converted["_Intro"]
 
 Converted["_Info"].AnchorPoint = Vector2.new(0.5, 0.5)
 Converted["_Info"].BackgroundColor3 = Color3.fromRGB(26.00000225007534, 26.00000225007534, 26.00000225007534)
@@ -231,14 +218,6 @@ Converted["__TEMPLATE"].Visible = false
 Converted["__TEMPLATE"].Name = "_TEMPLATE"
 Converted["__TEMPLATE"].Parent = Converted["_HapticLoader"]
 
-Converted["_Frame"].BackgroundColor3 = Color3.fromRGB(31.000001952052116, 31.000001952052116, 31.000001952052116)
-Converted["_Frame"].BorderColor3 = Color3.fromRGB(0, 0, 0)
-Converted["_Frame"].BorderSizePixel = 0
-Converted["_Frame"].Position = UDim2.new(0.295107037, 0, 0.246815294, 0)
-Converted["_Frame"].Size = UDim2.new(0, 536, 0, 318)
-Converted["_Frame"].Visible = false
-Converted["_Frame"].Parent = Converted["_HapticLoader"]
-
 -- Fake Module Scripts:
 
 local fake_module_scripts = {}
@@ -257,7 +236,7 @@ end
 
 -- Fake Local Scripts:
 
-local function QAUF_fake_script() -- Fake Script: StarterGui.HapticLoader.Init
+local function IOSRV_fake_script() -- Fake Script: StarterGui.HapticLoader.Init
     local script = Instance.new("LocalScript")
     script.Name = "Init"
     script.Parent = Converted["_HapticLoader"]
@@ -274,7 +253,6 @@ local function QAUF_fake_script() -- Fake Script: StarterGui.HapticLoader.Init
 	local Info = script.Parent.Info
 	local title = Intro.title
 	local using = Intro.using
-	local image = Intro.image
 	
 	local click = Info.click
 	
@@ -286,11 +264,35 @@ local function QAUF_fake_script() -- Fake Script: StarterGui.HapticLoader.Init
 	
 	local scripturl = ""
 	
+	local gameids = {
+		[9721712050] = {
+			name = "Model Hood",
+			url = "https://raw.githubusercontent.com/BatuKvi123/ModelHoodSilentAim/refs/heads/main/main.lua",
+			infos = {
+				"Added Silent Aim"
+			}
+		}
+	}
+	
+	local todecode = request({
+		Url = "https://raw.githubusercontent.com/BatuKvi123/LoaderUI/refs/heads/main/Scripts.json",
+		Method = "GET"
+	})
+	
+	local scripts
+	
+	if todecode.StatusCode == 200 then
+		scripts = game:GetService("HttpService"):JSONDecode(todecode.Body)
+	else
+		game.Players.LocalPlayer:Kick("[Haptic Hub]: Something went wrong while trying to get script infos json.")
+	end
+	
+	
+	
 	local function intro()
 		Intro.Visible = true
 		Tween(title, ti, {TextTransparency = 0})
 		Tween(using, ti, {TextTransparency = 0.5})
-		Tween(image, ti, {ImageTransparency = 0})
 		task.wait(2.5)
 		Intro.Visible = false
 		task.wait(.2)
@@ -302,7 +304,6 @@ local function QAUF_fake_script() -- Fake Script: StarterGui.HapticLoader.Init
 		task.wait(1.5)
 		Tween(title, ti, {TextTransparency = 1})
 		Tween(using, ti, {TextTransparency = 1})
-		Tween(image, ti, {ImageTransparency = 1})
 		task.wait(.6)
 		Intro.Visible = false
 	end
@@ -310,7 +311,7 @@ local function QAUF_fake_script() -- Fake Script: StarterGui.HapticLoader.Init
 	local function infos(info)
 			savedT = {}
 	
-			savedT[script.Parent.Info] = {Transparency = script.Parent.Info.Transparency}
+			savedT[script.Parent.Info] = {BackgroundTransparency = script.Parent.Info.BackgroundTransparency}
 	
 		for _, v in pairs(script.Parent.Info:GetDescendants()) do
 			if v:IsA("GuiObject") then
@@ -336,6 +337,14 @@ local function QAUF_fake_script() -- Fake Script: StarterGui.HapticLoader.Init
 				end
 			end
 		end
+		
+		Info.Visible = true
+		
+		for obj, transparent in pairs(savedT) do
+			for pname, val in pairs(transparent) do
+				Tween(obj, ti, {[pname] = val})
+			end
+		end
 	
 		
 		for _, v in pairs(info) do
@@ -357,13 +366,13 @@ local function QAUF_fake_script() -- Fake Script: StarterGui.HapticLoader.Init
 		loadstring(game:HttpGet(scripturl))()
 	end)
 	
-	return function(infossss, url)
-		scripturl = url
+	local data = scripts[tostring(game.GameId)]
+	if not data then game.Players.LocalPlayer:Kick("[Haptic Hub]: Unsupported game!") end
+		scripturl = data.url
 		task.wait(2)
 		intro()
 		task.wait(1)
-		infos(infossss)
-	end
+		infos(data.infos)
 end
 
-return QAUF_fake_script()
+return IOSRV_fake_script()
